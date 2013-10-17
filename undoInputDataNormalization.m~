@@ -1,0 +1,19 @@
+function [inputData] = undoInputDataNormalization( normalizedInputData, maxMinVals )
+    %Return input Data to original state before normalizing 
+    numCols = size(inputData,2);
+    inputData = [];
+
+    for(i=1:(numCols/samplesPerProfile))
+        offset = (i-1)*samplesPerProfile + 1;
+        profiles = normalizedInputData(:,offset:offset+samplesPerProfile-1);
+        maxVal = maxMinVals(i,1);
+        minVal = maxMinVals(i,2);
+        
+        profiles = (prof - minVal) ./ (maxVal - minVal);
+    normalizedInputData = [normalizedInputData profilesToNormalize];
+        maxMinVals = [[maxVal minVal];maxMinVals];
+    end
+    
+
+end
+
